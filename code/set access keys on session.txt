@@ -1,0 +1,8 @@
+spark.conf.set("fs.azure.account.key.tpchdata.dfs.core.windows.net","")
+spark.conf.set("fs.azure.createRemoteFileSystemDuringInitialization", "true")
+
+%sql
+select count(*) from parquet.`abfss://cont01@cloudfilesadls.dfs.core.windows.net/parquet/`
+
+df  = spark.read.parquet("abfss://zztest@tpchdata.dfs.core.windows.net/ORDERS/")
+df.write.parquet("abfss://zztest@tpchdata.dfs.core.windows.net/ORDERS_abfss_session/")

@@ -1,0 +1,13 @@
+dbutils.fs.mount(
+  source = "wasbs://zztest@tpchdata.blob.core.windows.net/",
+  mount_point = "/mnt/mnt02",
+  extra_configs = {"fs.azure.account.key.tpchdata.blob.core.windows.net":""})
+
+%fs ls /mnt/mnt02/
+
+
+display(dbutils.fs.mounts())
+
+dbutils.fs.unmount("/mnt/mnt02")
+
+
