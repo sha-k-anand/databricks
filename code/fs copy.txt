@@ -3,3 +3,5 @@ spark.conf.set("fs.azure.createRemoteFileSystemDuringInitialization", "true")
 
 
 %fs cp -r /databricks-datasets/amazon/test4K/ abfss://zztest@tpchdata.dfs.core.windows.net/databricks-datasets/amazon/test4k/
+
+%sh cp /local /dbfs/mnt/mnt
