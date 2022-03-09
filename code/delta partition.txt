@@ -1,3 +1,9 @@
+%python
+df = spark.read.load('abfss://tpch-sf1000-consolidated@tpchdata.dfs.core.windows.net/SUPPLIER/', format='parquet')
+df2 = df.write.format("delta").save('abfss://tpch-sf1000-databricks-deltalake@tpchdata.dfs.core.windows.net/SUPPLIER/')
+
+
+
 
 %python
 df = spark.read.load('abfss://tpch-sf1000-consolidated@tpchdata.dfs.core.windows.net/SUPPLIER/', format='parquet')

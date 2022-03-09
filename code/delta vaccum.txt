@@ -1,0 +1,5 @@
+spark.conf.set("spark.databricks.delta.retentionDurationCheck.enabled","false")
+
+
+%sql
+VACUUM zzDelta_SUPPLIER_DBricks RETAIN 0 HOURS
