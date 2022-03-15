@@ -1,3 +1,8 @@
+%sql
+OPTIMIZE zzDelta_SUPPLIER_DBricks ZORDER BY(S_PHONE)
+
+
+
 spark.conf.set("spark.databricks.delta.retentionDurationCheck.enabled","false")
 
 

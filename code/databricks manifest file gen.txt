@@ -1,0 +1,4 @@
+spark.conf.set("spark.databricks.delta.symlinkFormatManifest.fileSystemCheck.enabled","false")
+
+%sql
+GENERATE symlink_format_manifest FOR TABLE delta.`abfss://tpch-sf1000-databricks-deltalake@tpchdata.dfs.core.windows.net/SUPPLIER2/`
