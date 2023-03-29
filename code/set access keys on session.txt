@@ -6,3 +6,5 @@ select count(*) from parquet.`abfss://cont01@cloudfilesadls.dfs.core.windows.net
 
 df  = spark.read.parquet("abfss://zztest@tpchdata.dfs.core.windows.net/ORDERS/")
 df.write.parquet("abfss://zztest@tpchdata.dfs.core.windows.net/ORDERS_abfss_session/")
+
+dbutils.fs.ls("abfss://cont01@shakaadlsmvnet.dfs.core.windows.net/folder01/")

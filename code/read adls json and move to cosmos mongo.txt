@@ -1,0 +1,35 @@
+spark.conf.set("fs.azure.account.key.zzsynapsehackadls2.dfs.core.windows.net","")
+spark.conf.set("fs.azure.createRemoteFileSystemDuringInitialization", "true")
+
+---Scala-----
+
+import com.mongodb.spark._
+import com.mongodb.spark.config._
+import org.apache.spark._
+import org.apache.spark.sql._
+
+var targetConnectionString = "mongodb://zzcosmosmongoi2:==@zzcosmosmongoi2.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@zzcosmosmongoi2@"
+var targetDb = "db"
+var targetCollection =  "coll02"
+
+val df = spark.read.json("abfss://bronzesubset@zzsynapsehackadls2.dfs.core.windows.net/reference_data/patients/1tb/00682d8b-8947-4237-958c-65dccfdf61e8/Patient.ndjson")
+
+val writeConfig = WriteConfig(Map(
+  "spark.mongodb.output.uri" -> targetConnectionString,
+  "spark.mongodb.output.database" -> targetDb,
+  "spark.mongodb.output.collection" -> targetCollection,
+  "spark.mongodb.output.maxBatchSize" -> "100"  
+))
+
+MongoSpark.save(df, writeConfig)
+
+--------------------------------
+val writeConfig = WriteConfig(Map(
+  "spark.mongodb.output.uri" -> targetConnectionString,
+  "spark.mongodb.output.database" -> targetDb,
+  "spark.mongodb.output.collection" -> targetCollection,
+  "spark.mongodb.output.maxBatchSize" -> "100"  ,
+  "spark.mongodb.input.partitioner"->"MongoSamplePartitioner ",
+  "spark.mongodb.input.partitionerOptions.partitionKey"->"id"
+))
+MongoSpark.save(df, writeConfig)
