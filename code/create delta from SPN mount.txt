@@ -1,0 +1,17 @@
+configs = {"fs.azure.account.auth.type": "OAuth",
+           "fs.azure.account.oauth.provider.type": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+           "fs.azure.account.oauth2.client.id": "",
+           "fs.azure.account.oauth2.client.secret": "",
+           "fs.azure.account.oauth2.client.endpoint": "https://login.microsoftonline.com/replacetenantid/oauth2/token"}
+
+
+
+dbutils.fs.mount(
+  source = "abfss://tpch-sf1000-databricks-deltalake@tpchdata02.dfs.core.windows.net/",
+  mount_point = "/mnt/mntadlsgen2new1",
+  extra_configs = configs)
+
+
+%sql
+CREATE TABLE zztest002  USING DELTA  OPTIONS (path '/mnt/mntadlsgen2new1/SUPPLIER/')
+
